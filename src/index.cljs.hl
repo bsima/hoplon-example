@@ -1,0 +1,45 @@
+(page "index.html")
+
+
+(def coffees
+  (cell
+   ["Ironsmith"
+    "Zumbar"
+    "Stumptown"]))
+
+
+(defn show-coffee [s]
+  (li (text s)))
+
+(defn choose [x]
+  (get @coffees (rand-int (count x))))
+
+(def todays-coffee
+  (cell (choose @coffees)))
+
+(add-watch coffees :chooser
+           #(reset! todays-coffee (choose %3)))
+
+(html
+  (head
+    (link :href "app.css" :rel "stylesheet" :type "text/css"))
+  (body
+   (h1 "Coffee chooser!")
+
+   (p (text "Today you should drink ~{todays-coffee}!"))
+   (button :click #(reset! todays-coffee (choose @coffees))
+           (text "Choose"))
+
+   (let [new-coffee (cell "")]
+     (div
+      (input :type "text"
+             :value new-coffee
+             :change #(reset! new-coffee @%))
+      (button :click #(dosync
+                       (swap! coffees conj @new-coffee)
+                       (reset! new-coffee ""))
+              (text "Add a coffee!"))))
+
+   (ul
+    (loop-tpl :bindings [coffee coffees]
+              (show-coffee coffee)))))

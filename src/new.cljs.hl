@@ -1,0 +1,31 @@
+(page "new.html")
+
+
+(def coffees
+  (cell
+   ["Zumbar"
+    "Ironsmith"
+    "stumptown"]))
+
+(defn show-coffee [coffee]
+  (li (text coffee)))
+
+
+(html
+ (body
+  (h1 "Our web app")
+
+  (let [new-coffee (cell "")]
+    (div
+     (input :type "text"
+            :value new-coffee
+            :change (fn [new-val]
+                      (reset! new-coffee @new-val)))
+     (button :click (fn [] (dosync
+                            (swap! coffees conj @new-coffee)
+                            (reset! new-coffee "")))
+             (text "Add a coffee!"))))
+
+  (ul
+   (loop-tpl :bindings [c coffees]
+             (show-coffee c)))))

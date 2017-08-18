@@ -1,6 +1,4 @@
-# address-book
-
-A [Hoplon][3] project designed to...well, that part is up to you.
+# hoplon coffee chooser
 
 ## Dependencies
 
@@ -19,7 +17,7 @@ A [Hoplon][3] project designed to...well, that part is up to you.
     - auto reload the html page on changes
     - Clojurescript REPL
 
-2. Go to [http://localhost:8000][2] in your browser. You should see "Hello, Hoplon!".
+2. Go to [http://localhost:8000][2] in your browser.
 
 3. If you edit and save a file, the task will recompile the code and reload the
    browser to show the updated version.
@@ -30,12 +28,8 @@ A [Hoplon][3] project designed to...well, that part is up to you.
     $ boot prod
     ```
 
-2. The compiled files will be on the `target/` directory. This will use
+2. The compiled files will be on the `out/` directory. This will use
    advanced compilation and prerender the html.
-
-## License
-
-Copyright © 2017, **Your Name Goes Here**
 
 [1]: http://boot-clj.com
 [2]: http://localhost:8000
